@@ -1,0 +1,37 @@
+<div class="container">
+    <div ng-controller="AddressController">
+      <header>
+        <h3>Addresses</h3>
+      </header>
+      <div class="row">
+
+        <form ng-submit="addAddress(newAddress)">
+
+          <div class="span3">
+            Country
+            <br />
+            <input type="text" placeholder="Enter user name" ng-model="newAddress.country" />
+          </div>
+    
+          <div class="span3">
+            City
+            <br />
+            <input type="text" placeholder="Enter user email" ng-model="newAddress.city" />
+          </div>
+    
+          <div class="span3">
+            Street:
+            <br />
+            <input type="text" placeholder="Enter user phone" ng-model="newAddress.street" />
+          </div>
+    
+          <div class="span3">
+            <input class="mt-20" type="submit" value="Add address">
+          </div>
+
+        </form>
+  
+      </div>
+    </div>
+  </div>
+  

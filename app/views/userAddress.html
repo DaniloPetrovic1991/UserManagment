@@ -1,0 +1,32 @@
+<div class="container" >
+
+    <h3>User addresses</h3>
+    <div ng-controller="UsersController">
+      <div class="row">
+  
+          <div ng-repeat="user in users">
+                  <div class="cardBody">Address: {{user.address[0].country}} </div>
+                  <div class="cardBody">Address: </div>
+                  <div class="cardBody">Address: </div>
+            </div>
+  
+              <div ng-show="editAddressInfo">
+                <div>
+                  <input type="text" ng-model="user.address.country" placeholder="Edit country">
+                </div>
+                <div>
+                  <input type="text" ng-model="address.address.city" placeholder="Edit city">
+                </div>
+                <div>
+                  <input type="text" ng-model="address.street.street" placeholder="Edit street">
+                </div>
+              </div>
+  
+              <button class="ml-10 mt-10" ng-show="!editAddressInfo" ng-click="editAddress(address)">Edit address</button>
+              <button class="ml-10 mt-10" ng-show="editAddressInfo" ng-click="saveAddressEdit()">Save address</button>
+              <button class="ml-10 mt-10" ng-click="deleteAddress(id)">Delete address</button>
+  
+      </div>
+    </div>
+  
+  </div>

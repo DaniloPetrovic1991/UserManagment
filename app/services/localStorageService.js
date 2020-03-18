@@ -1,0 +1,2 @@
+localStorageServiceProvider
+  .setStorageType('localStorage');
