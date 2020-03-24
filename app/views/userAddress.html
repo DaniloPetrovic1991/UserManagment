@@ -1,32 +1,73 @@
-<div class="container" >
-
-    <h3>User addresses</h3>
-    <div ng-controller="UsersController">
-      <div class="row">
-  
-          <div ng-repeat="user in users">
-                  <div class="cardBody">Address: {{user.address[0].country}} </div>
-                  <div class="cardBody">Address: </div>
-                  <div class="cardBody">Address: </div>
-            </div>
-  
-              <div ng-show="editAddressInfo">
-                <div>
-                  <input type="text" ng-model="user.address.country" placeholder="Edit country">
-                </div>
-                <div>
-                  <input type="text" ng-model="address.address.city" placeholder="Edit city">
-                </div>
-                <div>
-                  <input type="text" ng-model="address.street.street" placeholder="Edit street">
-                </div>
-              </div>
-  
-              <button class="ml-10 mt-10" ng-show="!editAddressInfo" ng-click="editAddress(address)">Edit address</button>
-              <button class="ml-10 mt-10" ng-show="editAddressInfo" ng-click="saveAddressEdit()">Save address</button>
-              <button class="ml-10 mt-10" ng-click="deleteAddress(id)">Delete address</button>
-  
+<div class="container">
+  <h3>User addresses</h3>
+</div>
+<div class="container">
+  <div ng-controller="UserAddressController">
+    <div
+      class="span3 card"
+      ng-repeat="address in user.address track by address.id"
+    >
+      <div ng-show="!editAddressInfo">
+        <div class="cardHeader">Address</div>
+        <div class="cardBody">Country: {{address.country}}</div>
+        <div class="cardBody">City: {{address.city}}</div>
+        <div class="cardBody">Street: {{address.street}}</div>
       </div>
+
+      <div ng-show="editAddressInfo">
+        <div>
+          <input
+            type="text"
+            ng-model="address.country"
+            placeholder="Edit country"
+          />
+        </div>
+        <div>
+          <input type="text" ng-model="address.city" placeholder="Edit city" />
+        </div>
+        <div>
+          <input
+            type="text"
+            ng-model="address.street"
+            placeholder="Edit street"
+          />
+        </div>
+      </div>
+
+      <button
+        class="ml-10 mt-10"
+        ng-show="!editAddressInfo"
+        ng-click="editAddress()"
+      >
+        Edit address
+      </button>
+      <button
+        class="ml-10 mt-10"
+        ng-show="editAddressInfo"
+        ng-click="saveAddressEdit()"
+      >
+        Save address
+      </button>
+      <button class="ml-10 mt-10" ng-click="deleteAddress(id)">
+        Delete address
+      </button>
+
+      <label class="mt-20 ml-10"
+        >Set default
+        <input
+          type="checkbox"
+          ng-checked="isChecked(address)"
+          ng-click="toggleSelection(address)"
+        />
+      </label>
     </div>
-  
   </div>
+</div>
+
+<div class="container">
+  <div ng-container="UserAddressController">
+    <div class="column ml-10">
+      <button ng-click="addAddress()" ng-show="!addAddressShow">Add address</button>
+    </div>
+  </div>
+</div>

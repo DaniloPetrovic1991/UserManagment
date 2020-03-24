@@ -1,4 +1,4 @@
-var app = angular.module("userManagment", ["ngRoute", 'ngStorage']);
+var app = angular.module("userManagment", ["ngRoute", "ngStorage"]);
 
 app.config([
   "$routeProvider",
@@ -11,13 +11,9 @@ app.config([
         templateUrl: "app/views/user.html",
         controller: "UsersController"
       })
-      .when("useraddress/:id", {
+      .when("/user/:id/address", {
         templateUrl: "app/views/userAddress.html",
-        controller: "UsersController"
-      })
-      .when("/address", {
-        templateUrl: "app/views/address.html",
-        controller: "UsersController"
+        controller: "UserAddressController"
       })
       .otherwise({
         redirectTo: "/home"
@@ -25,8 +21,12 @@ app.config([
   }
 ]);
 
-app.controller("UsersController", function($scope, $location, $localStorage, userService) {
-  
+app.controller("UsersController", function(
+  $scope,
+  $location,
+  $localStorage,
+  userService
+) {
   init();
 
   function init() {
@@ -35,28 +35,28 @@ app.controller("UsersController", function($scope, $location, $localStorage, use
   }
 
   $scope.insertUser = function() {
-    
+
     var name = $scope.newUser.name;
     var email = $scope.newUser.email;
     var phone = $scope.newUser.phone;
-    var address = $scope.newUser.address;
-    userService.insertUser(name, email, phone, address);
-    $scope.newUser.name = '';
-    $scope.newUser.email = '';
-    $scope.newUser.phone = '';
-    $scope.newUser.address = '';
+    userService.insertUser(name, email, phone);
+    $scope.newUser.name = "";
+    $scope.newUser.email = "";
+    $scope.newUser.phone = "";
 
     console.log($scope.users);
-
+    
     $scope.users = $localStorage.users;
 
     $location.path("/home.html");
+
+
   };
 
-  $scope.editUser = function(users) {
-    $scope.editUserInfo = true;
-    $scope.newUser = users;
-    console.log(users);
+  $scope.editUser = function(user) { 
+      $scope.editUserInfo = true; 
+      userService.editUser(user);
+
   };
 
   $scope.saveUserEdit = function() {
@@ -65,36 +65,48 @@ app.controller("UsersController", function($scope, $location, $localStorage, use
   };
 
   $scope.deleteUser = function(id) {
-    userService.deleteUser(id)
+    userService.deleteUser(id);
   };
 });
 
-
-app.controller("AddressController", function(
-  $scope,
-  $location,
-  addressService
-) {
+app.controller("AddressController", function($scope, $location, userService) {
   $scope.addresses = [];
 
   init();
 
   function init() {
-    $scope.addresses = addressService.getAddress();
+    $scope.addresses = userService.getAddress();
   }
+});
 
-  $scope.addAddress = function() {
-    $scope.addresses.push({
-      country: $scope.newAddress.country,
-      city: $scope.newAddress.city,
-      street: $scope.newAddress.street
-    });
-    $location.path("/home.html");
-  };
+app.controller("UserAddressController", function(
+  $scope,
+  $routeParams,
+  userService,
+  addressService
+) {
+  init();
+
+  function init() {
+    var id = $routeParams.id ? parseInt($routeParams.id) : 0;
+    if (id > 0) {
+      $scope.user = userService.getUser(id);
+    }
+    $scope.id = id;
+    $scope.editAddressInfo = false;
+  }
 
   $scope.editAddress = function(addresses) {
     $scope.editAddressInfo = true;
     $scope.newAddress = addresses;
+  };
+
+  $scope.addAddress = function() {
+    $scope.user.address.push({
+      country: $scope.user.address.country,
+      city: $scope.user.address.city,
+      street: $scope.user.address.street
+    });
   };
 
   $scope.saveAddressEdit = function() {
@@ -105,20 +117,17 @@ app.controller("AddressController", function(
   $scope.deleteAddress = function(id) {
     addressService.deleteAddress(id);
   };
-});
 
+  $scope.isChecked = function(entity) {
+    return $scope.checkedEntity === entity;
+  };
 
-app.controller("UserAddressController", function(
-  $scope,
-  $routeParams,
-  userService
-) {
-  init();
-
-  function init() {
-    var id = $routeParams.id ? parseInt($routeParams.id) : 0;
-    if (id > 0) {
-      $scope.id = userService.getUsers(id);
+  $scope.toggleSelection = function(entity) {
+    entity.checked = !entity.checked;
+    if (entity.checked) {
+      $scope.checkedEntity = entity;
+    } else {
+      $scope.checkedEntity = null;
     }
-  }
+  };
 });

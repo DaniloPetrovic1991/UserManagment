@@ -9,7 +9,7 @@
           <div class="cardHeader">{{user.name}}</div>
           <div class="cardBody">Email: {{user.email}}</div>
           <div class="cardBody">Phone: {{user.phone}}</div>
-          <div class="cardBody"><a href="/app/views/userAddress.html">View address</a></div>
+          <div class="cardBody"><a href="#!/user/{{user.id}}/address">View address</a></div>
         </div>
 
             <div ng-show="editUserInfo">
@@ -24,7 +24,7 @@
               </div>
             </div>
 
-            <button class="ml-10 mt-10" ng-show="!editUserInfo" ng-click="editUser(users)">Edit user</button>
+            <button class="ml-10 mt-10" ng-show="!editUserInfo" ng-click="editUser()">Edit user</button>
             <button class="ml-10 mt-10" ng-show="editUserInfo" ng-click="saveUserEdit()">Save user</button>
             <button class="ml-10 mt-10" ng-click="deleteUser(user.id)">Delete user</button>
 

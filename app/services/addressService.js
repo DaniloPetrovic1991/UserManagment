@@ -1,36 +1,32 @@
-app.service('addressService', function(){
-    this.getAddress = function() {
-      return addresses;
-    }
-  
-    this.insertAddress = function(country, city, street) {
-      var addressID = addresses.length + 1;
-      addresses.push({
-        id: addressID,
-        country: country,
-        city: city,
-        street: street,
-      });
-    };
-  
-    this.deleteAddress = function(id) {
-      for(var i = addresses.length -1; i >= 0; i--){
-        if(addresses[i].id === id){
-          addresses.splice(i,1);
-          break;
-        }
-      }
-    };
-  
-    this.getAddress = function(id) {
-      for(var i =0; i< addresses.length; i++){
-        if(addresses[i].id === id) {
-          return addresses[i];
-        }
-      }
-      return null;
-    };
-  
 
-  });
-  
+app.service("addressService", function() {
+
+    this.getUsers = function() {
+        return users;
+      };
+
+    this.getAddresses = function() {
+        return users.address[id];
+      }
+    
+      this.addAddress = function(country, city, street) {
+        var addressID = users.address.length + 1;
+        user.address.push({
+          id: addressID,
+          country: country,
+          city: city,
+          street: street,
+        });
+        newAddress = {};
+      };
+    
+      this.deleteAddress = function(id) {
+        for(var i = users.length - 1; i >= 0; i--){
+          if(users[i].id === id) {
+            users[i].address.splice(i,1);
+            newAddress = {};
+          }
+        }
+      };
+
+});

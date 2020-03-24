@@ -4,42 +4,44 @@
       <h3>User</h3>
     </header>
     <div class="row">
+      <div class="span3">
+        Name:
+        <br />
+        <input
+          type="text"
+          placeholder="Enter user name"
+          ng-model="newUser.name"
+        />
+      </div>
 
-            <div class="span3">
-              Name:
-              <br />
-              <input type="text" placeholder="Enter user name" ng-model="newUser.name" />
-            </div>
-      
-            <div class="span3">
-              Email:
-              <br />
-              <input type="text" placeholder="Enter user email" ng-model="newUser.email" />
-            </div>
-      
-            <div class="span3">
-              Phone:
-              <br />
-              <input type="text" placeholder="Enter user phone" ng-model="newUser.phone" />
-            </div>
-      
-            <div class="span3">
-              Address:
-              <br />
-              <input type="text" placeholder="Enter user address" ng-model="newUser.address" />
-            </div>
-      
-            <div class="span3">
-              <input type="submit" value="Add user" ng-click="insertUser()">
-            </div>
+      <div class="span3">
+        Email:
+        <br />
+        <input
+          type="text"
+          placeholder="Enter user email"
+          ng-model="newUser.email"
+        />
+      </div>
 
-            <div class="span3">
-              <input type="submit" value="Edit user address">
-            </div>
+      <div class="span3">
+        Phone:
+        <br />
+        <input
+          type="text"
+          placeholder="Enter user phone"
+          ng-model="newUser.phone"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="span3">
+        <input type="submit" value="Add user" ng-click="insertUser()" />
+      </div>
 
-            <div>
-          </div>
-
+      <div class="span3">
+        <input type="submit" value="Edit user address" />
+      </div>
     </div>
   </div>
 </div>
