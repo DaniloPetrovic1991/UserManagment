@@ -19,7 +19,7 @@ body{
 }
 
 .card {
-  background-color:#efefef;
+  background-color:#4dffa6;
   border: 1px solid black;
   height: 200px;
   width: 260px !important;
@@ -27,7 +27,7 @@ body{
 }
 
 .cardHeader {
-  background-color: #006dcc;
+  background-color: #6699ff;
   font-size:14pt;
   color:white;
   padding:5px;
